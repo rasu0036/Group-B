@@ -1,4 +1,4 @@
 # Group-B
 
-长这样 initial plan
-![alt text](image.png)；
+Basic big circles are set
+![alt text](image-1.png)

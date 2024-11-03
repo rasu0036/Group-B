@@ -55,14 +55,14 @@ function setup() {
 
     // Small strke circles with specified colors and locations
     smallStrokeCircles = [
-    new SmallStrokeCircle(bigCircles[1], r * 0.5, color('#D43E8E'), color('#F0504E'), 3, true), // Green on circle 2
-    new SmallStrokeCircle(bigCircles[2], r * 0.2, color('#199646'), color('#F0504E'), 3, true), // Green on circle 3
-    new SmallStrokeCircle(bigCircles[4], r * 0.2, color('#D43E8E'), color('#F0504E'), 3, true), // Purple on circle 4
-    new SmallStrokeCircle(bigCircles[8], r * 0.2, color('#D43E8E'), color('#F0504E'), 3, true), // Purple on circle 9
-    new SmallStrokeCircle(bigCircles[9], r * 0.2, color('#242062'), color('#F0504E'), 3, true), // Dark purple on circle 10
-    new SmallStrokeCircle(bigCircles[11], r * 0.2, color('#242062'), color('#F0504E'), 3, true), // Dark purple on circle 12
-    new SmallStrokeCircle(bigCircles[14], r * 0.2, color('#242062'), color('#F0504E'), 3, true),// Dark purple on circle 15
-    new SmallStrokeCircle(bigCircles[15], r * 0.2, color('#242062'), color('#F0504E'), 3, true)// Dark purple on circle 16
+    new SmallStrokeCircle(bigCircles[1], r * 0.5, null, color(255), 3, true), // Green on circle 2
+    new SmallStrokeCircle(bigCircles[2], r * 0.2, null, color(255), 3, true), // Green on circle 3
+    new SmallStrokeCircle(bigCircles[4], r * 0.2, null, color(255), 3, true), // Purple on circle 4
+    new SmallStrokeCircle(bigCircles[8], r * 0.2, null, color(255), 3, true), // Purple on circle 9
+    new SmallStrokeCircle(bigCircles[9], r * 0.2, null, color(255), 3, true), // Dark purple on circle 10
+    new SmallStrokeCircle(bigCircles[11], r * 0.2, null, color(255), 3, true), // Dark purple on circle 12
+    new SmallStrokeCircle(bigCircles[14], r * 0.2, null, color(255), 3, true),// Dark purple on circle 15
+    new SmallStrokeCircle(bigCircles[15], r * 0.2, null, color(255), 3, true)// Dark purple on circle 16
     
     ];
   }

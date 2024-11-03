@@ -1,5 +1,6 @@
 let colors = [];
 let bigCircles = [];
+let smallStrokeCircles = [];
   
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -51,6 +52,19 @@ function setup() {
     new Circle(0.9, 0.57, r, colors[14]),//15
     new Circle(0.87, 1, r, colors[15])//16
     ];
+
+    // Small strke circles with specified colors and locations
+    smallStrokeCircles = [
+    new SmallStrokeCircle(bigCircles[1], r * 0.5, color('#D43E8E'), color('#F0504E'), 3, true), // Green on circle 2
+    new SmallStrokeCircle(bigCircles[2], r * 0.2, color('#199646'), color('#F0504E'), 3, true), // Green on circle 3
+    new SmallStrokeCircle(bigCircles[4], r * 0.2, color('#D43E8E'), color('#F0504E'), 3, true), // Purple on circle 4
+    new SmallStrokeCircle(bigCircles[8], r * 0.2, color('#D43E8E'), color('#F0504E'), 3, true), // Purple on circle 9
+    new SmallStrokeCircle(bigCircles[9], r * 0.2, color('#242062'), color('#F0504E'), 3, true), // Dark purple on circle 10
+    new SmallStrokeCircle(bigCircles[11], r * 0.2, color('#242062'), color('#F0504E'), 3, true), // Dark purple on circle 12
+    new SmallStrokeCircle(bigCircles[14], r * 0.2, color('#242062'), color('#F0504E'), 3, true),// Dark purple on circle 15
+    new SmallStrokeCircle(bigCircles[15], r * 0.2, color('#242062'), color('#F0504E'), 3, true)// Dark purple on circle 16
+    
+    ];
   }
 
 //set up the class of the big circle
@@ -74,6 +88,30 @@ class Circle {
     }
   }
   
+class SmallStrokeCircle {
+  constructor(bigCircle, r, fillColor, strokeColor, strokeWeightVal, hasFill) {
+    this.bigCircle = bigCircle;
+    this.r = r;
+    this.fillColor = fillColor;
+    this.strokeColor = strokeColor; 
+    this.strokeWeightVal = strokeWeightVal;
+    this.hasFill = hasFill;
+  }
+  
+  draw() {
+    if (this.hasFill && this.fillColor) {
+      fill(this.fillColor);
+    } else {
+      noFill();
+    }
+    stroke(this.strokeColor);
+    strokeWeight(this.strokeWeightVal);
+
+    let x = width * this.bigCircle.xScale;
+    let y = height * this.bigCircle.yScale;
+    ellipse(x, y, this.r);
+  }
+}
 
 function draw() {
   background(255);
@@ -83,7 +121,11 @@ function draw() {
     circle.draw();
     }
 
+  // Draw small stroke circles on top
+  for (let smallCircle of smallStrokeCircles) {
+    smallCircle.draw();
   }
+}
   
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);

@@ -55,15 +55,20 @@ function setup() {
 
     // Small strke circles with specified colors and locations
     smallStrokeCircles = [
-    new SmallStrokeCircle(bigCircles[1], r * 0.5, null, color(255), 3, true), // Green on circle 2
-    new SmallStrokeCircle(bigCircles[2], r * 0.2, null, color(255), 3, true), // Green on circle 3
-    new SmallStrokeCircle(bigCircles[4], r * 0.2, null, color(255), 3, true), // Purple on circle 4
-    new SmallStrokeCircle(bigCircles[8], r * 0.2, null, color(255), 3, true), // Purple on circle 9
-    new SmallStrokeCircle(bigCircles[9], r * 0.2, null, color(255), 3, true), // Dark purple on circle 10
-    new SmallStrokeCircle(bigCircles[11], r * 0.2, null, color(255), 3, true), // Dark purple on circle 12
-    new SmallStrokeCircle(bigCircles[14], r * 0.2, null, color(255), 3, true),// Dark purple on circle 15
-    new SmallStrokeCircle(bigCircles[15], r * 0.2, null, color(255), 3, true)// Dark purple on circle 16
+    new SmallStrokeCircle(bigCircles[1], r * 0.4, null, color('#D43E8E'), 40, true), //  circle 2
+    new SmallStrokeCircle(bigCircles[1], r * 0.2, null, color('#879F88'), 25, true), //  circle 2
+    new SmallStrokeCircle(bigCircles[1], r * 0.1, null, color('#EF3D29'), 15, true), //  circle 2
+    new SmallStrokeCircle(bigCircles[2], r * 0.2, null, color(255), 3, true), //  circle 3
+    new SmallStrokeCircle(bigCircles[4], r * 0.2, null, color(255), 3, true), // circle 4
+    new SmallStrokeCircle(bigCircles[8], r * 0.2, null, color(255), 3, true), // circle 9
+    new SmallStrokeCircle(bigCircles[9], r * 0.2, null, color(255), 3, true), //  circle 10
+    new SmallStrokeCircle(bigCircles[11], r * 0.2, null, color(255), 3, true), //  circle 12
+    new SmallStrokeCircle(bigCircles[14], r * 0.2, null, color(255), 3, true),//  circle 15
+    new SmallStrokeCircle(bigCircles[15], r * 0.2, null, color(255), 3, true),// circle 16
     
+    new SmallStrokeCircle(bigCircles[1], r * 0.34, null, color('#F05641'), 15, false, true), //  circle 2
+    new SmallStrokeCircle(bigCircles[1], r * 0.4, null, color('#F05641'), 10, false, true), //  circle 2
+   
     ];
   }
 
@@ -89,29 +94,53 @@ class Circle {
   }
   
 class SmallStrokeCircle {
-  constructor(bigCircle, r, fillColor, strokeColor, strokeWeightVal, hasFill) {
+  constructor(bigCircle, r, fillColor, strokeColor, strokeWeightVal, hasFill, isDashed = false) {
     this.bigCircle = bigCircle;
     this.r = r;
     this.fillColor = fillColor;
     this.strokeColor = strokeColor; 
     this.strokeWeightVal = strokeWeightVal;
     this.hasFill = hasFill;
+    this.isDashed = isDashed;
   }
-  
   draw() {
-    if (this.hasFill && this.fillColor) {
-      fill(this.fillColor);
-    } else {
-      noFill();
-    }
-    stroke(this.strokeColor);
-    strokeWeight(this.strokeWeightVal);
-
     let x = width * this.bigCircle.xScale;
     let y = height * this.bigCircle.yScale;
-    ellipse(x, y, this.r);
-  }
+
+    if (this.isDashed) {
+        this.drawDashedCircle(x, y, this.r);
+    } else {
+        if (this.hasFill && this.fillColor) {
+            fill(this.fillColor);
+        } else {
+            noFill();
+        }
+        stroke(this.strokeColor);
+        strokeWeight(this.strokeWeightVal);
+        ellipse(x, y, this.r);
+    }
 }
+
+drawDashedCircle(x, y, diameter) {
+    let numDashes = 20; // Number of dashes in the circle
+    let angleStep = TWO_PI / numDashes;
+    let gapRatio = 0.7; // Ratio of gap size to total segment size (adjust this to change spacing)
+    stroke(this.strokeColor);
+    strokeWeight(this.strokeWeightVal);
+    strokeCap(ROUND); // Makes the ends of dashes rounded
+
+    for (let i = 0; i < numDashes; i++) {
+        let angle = i * angleStep;
+        let x1 = x + cos(angle) * diameter / 2;
+        let y1 = y + sin(angle) * diameter / 2;
+        let x2 = x + cos(angle + angleStep * (1 - gapRatio)) * diameter / 2;
+        let y2 = y + sin(angle + angleStep * (1 - gapRatio)) * diameter / 2;
+        line(x1, y1, x2, y2);
+    }
+}
+}
+
+
 
 function draw() {
   background(255);

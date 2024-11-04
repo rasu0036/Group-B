@@ -211,8 +211,8 @@ function draw() {
     }
 
     //draw the dottedline circles
-  for(let kcircle of kCircle){
-    kcircle.display();
+  for(let kcircles of kCircle){
+    kcircles.display();
   }
 
   // Draw small stroke circles on top

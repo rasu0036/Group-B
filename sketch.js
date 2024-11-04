@@ -3,10 +3,12 @@ let bigCircles = [];
 let smallStrokeCircles = [];
 let kpatternColors = [];
 let kCircle = [];
-  
+let concentricCircles = []; // Array to store concentric circles
+
 function setup() {
     createCanvas(windowWidth, windowHeight);
   
+    
   //color array  
   colors = [
     color('#242062'),//1 a
@@ -73,7 +75,6 @@ function setup() {
     new kCircles(bigCircles[13].xScale, bigCircles[13].yScale, r, kpatternColors[4]),
     new kCircles(bigCircles[15].xScale, bigCircles[15].yScale, r, kpatternColors[5])
     ]
-
 
     // Small strke circles with specified colors and locations
     smallStrokeCircles = [
@@ -196,9 +197,9 @@ drawDashedCircle(x, y, diameter) {
         let x2 = x + cos(angle + angleStep * (1 - gapRatio)) * diameter / 2;
         let y2 = y + sin(angle + angleStep * (1 - gapRatio)) * diameter / 2;
         line(x1, y1, x2, y2);
-    }
-}
-}
+    }}}
+
+
 
 
 

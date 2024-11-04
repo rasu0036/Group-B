@@ -1,5 +1,8 @@
 let colors = [];
 let bigCircles = [];
+let smallStrokeCircles = [];
+let kpatternColors = [];
+let kCircle = [];
 let concentricCircles = [];
 
 // Set up the canvas and initialize circles

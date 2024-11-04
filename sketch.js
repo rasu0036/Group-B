@@ -1,10 +1,11 @@
 let colors = [];
 let bigCircles = [];
 let smallStrokeCircles = [];
+let kpatternColors = [];
+let kCircle = [];
   
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    colorMode(HSB);
   
   //color array  
   colors = [
@@ -30,7 +31,8 @@ function setup() {
   //radius is scaled with canvas
   let r = min(width, height) * 0.35; 
 
-  //change at 11.2, set an array to store the big circles maybe more readable
+  //I added all circles in the array
+  //if want to use the position values, write "width * bigCircles[0].xScale"(or specific value directly) and so on
   bigCircles = [
     //x larger, more to the right; y larger, more to the bottom
     //scale factors for positions are set one by one roughly instead of using a loop and formulas, 
@@ -52,6 +54,26 @@ function setup() {
     new Circle(0.9, 0.57, r, colors[14]),//15
     new Circle(0.87, 1, r, colors[15])//16
     ];
+
+    //kate's pattern, dotted line circles
+  kpatternColors = [
+    color('#FFFFFF'),//4
+    color('#0C63AD'),//6
+    color('#b780b7'),//8
+    color('#FFFFFF'),//12
+    color('#FDCE23'),//14
+    color('#FFFFFF')//16
+    ];
+
+  kCircle = [
+    new kCircles(bigCircles[3].xScale, bigCircles[3].yScale, r, kpatternColors[0]),
+    new kCircles(bigCircles[5].xScale, bigCircles[5].yScale, r, kpatternColors[1]),
+    new kCircles(bigCircles[7].xScale, bigCircles[7].yScale, r, kpatternColors[2]),
+    new kCircles(bigCircles[11].xScale, bigCircles[11].yScale, r, kpatternColors[3]),
+    new kCircles(bigCircles[13].xScale, bigCircles[13].yScale, r, kpatternColors[4]),
+    new kCircles(bigCircles[15].xScale, bigCircles[15].yScale, r, kpatternColors[5])
+    ]
+
 
     // Small strke circles with specified colors and locations
     smallStrokeCircles = [
@@ -83,7 +105,7 @@ class Circle {
     this.color = color;
     }
   
-  draw() {
+  display() {
     fill(this.color);
     noStroke();
     //x and y actual position are width*scale factors
@@ -92,6 +114,44 @@ class Circle {
     ellipse(x, y, this.r);
     }
   }
+
+class kCircles {
+  constructor(x, y, r, color){
+    this.x = x;
+    this.y = y;
+    this.r = r;
+    this.color = color;
+  }
+
+  display(){
+    noFill();
+    stroke(this.color);
+    strokeWeight(2);
+
+    //4 layers of dotted lines
+    let layers = 4;
+    for(let i = 1; i <= layers; i++){
+      //smaller r value refers to more dense dotted lines
+      let r = this.r + this.r * i/2;
+
+      let x = width * this.x;
+      let y = height * this.y;
+      //adjust r to cater for the size of the circle
+      //I failed to use any formula to calculate the r value
+      //so I tried different values and r/7 is perfect
+      let step = 0.5;
+      for(let i = 0; i < TWO_PI; i += step){
+        let x1 = x + cos(i) * (r/7);
+        let y1 = y + sin(i) * (r/7);
+        let x2 = x + cos(i + 0.15) * (r/7);
+        let y2 = y + sin(i + 0.15) * (r/7);
+
+        line(x1, y1, x2, y2);
+    }
+  }
+}
+
+}
   
 class SmallStrokeCircle {
   constructor(bigCircle, r, fillColor, strokeColor, strokeWeightVal, hasFill, isDashed = false) {
@@ -147,8 +207,13 @@ function draw() {
 
   //draw the big circles
   for(let circle of bigCircles){
-    circle.draw();
+    circle.display();
     }
+
+    //draw the dottedline circles
+  for(let kcircle of kCircle){
+    kcircle.display();
+  }
 
   // Draw small stroke circles on top
   for (let smallCircle of smallStrokeCircles) {

@@ -85,16 +85,54 @@ function setup() {
     new SmallStrokeCircle(bigCircles[1], r * 0.4, null, color('#D43E8E'), 40, true), //  circle 2
     new SmallStrokeCircle(bigCircles[1], r * 0.2, null, color('#879F88'), 25, true), //  circle 2
     new SmallStrokeCircle(bigCircles[1], r * 0.1, null, color('#EF3D29'), 15, true), //  circle 2
-    new SmallStrokeCircle(bigCircles[2], r * 0.2, null, color(255), 3, true), //  circle 3
-    new SmallStrokeCircle(bigCircles[4], r * 0.2, null, color(255), 3, true), // circle 4
-    new SmallStrokeCircle(bigCircles[8], r * 0.2, null, color(255), 3, true), // circle 9
-    new SmallStrokeCircle(bigCircles[9], r * 0.2, null, color(255), 3, true), //  circle 10
-    new SmallStrokeCircle(bigCircles[11], r * 0.2, null, color(255), 3, true), //  circle 12
-    new SmallStrokeCircle(bigCircles[14], r * 0.2, null, color(255), 3, true),//  circle 15
-    new SmallStrokeCircle(bigCircles[15], r * 0.2, null, color(255), 3, true),// circle 16
+
+    new SmallStrokeCircle(bigCircles[2], r * 0.2, null, color('#BE479A'), 30, true), //  circle 3
+    new SmallStrokeCircle(bigCircles[2], r * 0.2, null, color('#F05656'), 15, true), //  circle 3
+    new SmallStrokeCircle(bigCircles[2], r * 0.07, null, color('#BE479A'), 30, true), //  circle 3
+    new SmallStrokeCircle(bigCircles[2], r * 0.07, null, color('#F05656'), 15, true), //  circle 3
+
+    new SmallStrokeCircle(bigCircles[4], r * 0.3, null, color('#F05641'), 15, true), // circle 5
+    new SmallStrokeCircle(bigCircles[4], r * 0.2, null, color('#D43E8E'), 15, true), // circle 5
+    new SmallStrokeCircle(bigCircles[4], r * 0.1, null, color('#F05641'), 15, true), // circle 5
+    new SmallStrokeCircle(bigCircles[4], r * 0.01, null, color('#42A959'), 15, true), // circle 5
+    
+    new SmallStrokeCircle(bigCircles[8], r * 0.4, null, color('#F05641'), 15, true), // circle 9
+    new SmallStrokeCircle(bigCircles[8], r * 0.3, null, color('#FFB6E3'), 10, true), // circle 9
+    new SmallStrokeCircle(bigCircles[8], r * 0.2, null, color('#F05641'), 15, true), // circle 9
+    new SmallStrokeCircle(bigCircles[8], r * 0.1, null, color('#FFB6E3'), 10, true), // circle 9
+
+    new SmallStrokeCircle(bigCircles[9], r * 0.1, null, color('#DA70AC'), 30, true), //  circle 10
+
+    new SmallStrokeCircle(bigCircles[10], r * 0.4, null, color('#D43E8E'), 40, true), //  circle 11
+    new SmallStrokeCircle(bigCircles[10], r * 0.2, null, color('#879F88'), 25, true), //  circle 11
+    new SmallStrokeCircle(bigCircles[10], r * 0.1, null, color('#EF3D29'), 15, true), //  circle 11
+
+    new SmallStrokeCircle(bigCircles[14], r * 0.2, null, color('#BE479A'), 30, true), //  circle 15
+    new SmallStrokeCircle(bigCircles[14], r * 0.2, null, color('#F05656'), 15, true), //  circle 15
+    new SmallStrokeCircle(bigCircles[14], r * 0.07, null, color('#BE479A'), 30, true), //  circle 15
+    new SmallStrokeCircle(bigCircles[14], r * 0.07, null, color('#F05656'), 15, true), //  circle 15
+   
+    new SmallStrokeCircle(bigCircles[11], r * 0.15, null, color('#DA70AC'), 30, true), //  circle 12
+    
+   
+    new SmallStrokeCircle(bigCircles[15], r * 0.4, null, color('#F05641'), 15, true), // circle 16
+    new SmallStrokeCircle(bigCircles[15], r * 0.3, null, color('#FFB6E3'), 10, true), // circle 16
+    new SmallStrokeCircle(bigCircles[15], r * 0.2, null, color('#F05641'), 15, true), // circle 16
+    new SmallStrokeCircle(bigCircles[15], r * 0.1, null, color('#FFB6E3'), 10, true), // circle 16
+   
+   
     
     new SmallStrokeCircle(bigCircles[1], r * 0.34, null, color('#F05641'), 15, false, true), //  circle 2
     new SmallStrokeCircle(bigCircles[1], r * 0.4, null, color('#F05641'), 10, false, true), //  circle 2
+
+    new SmallStrokeCircle(bigCircles[9], r * 0.3, null, color('#D22C91'), 12, false, true), //  circle 10
+    new SmallStrokeCircle(bigCircles[9], r * 0.2, null, color('#DDD64E'), 8, false, true), //  circle 10
+
+    new SmallStrokeCircle(bigCircles[10], r * 0.34, null, color('#F05641'), 15, false, true), //  circle 11
+    new SmallStrokeCircle(bigCircles[10], r * 0.4, null, color('#F05641'), 10, false, true), //  circle 11
+
+    new SmallStrokeCircle(bigCircles[11], r * 0.3, null, color('#D22C91'), 12, false, true), //  circle 12
+    new SmallStrokeCircle(bigCircles[11], r * 0.2, null, color('#DDD64E'), 8, false, true), //  circle 12
    
     ];
     whiteDotLayers = [
@@ -202,7 +240,7 @@ class SmallStrokeCircle {
 drawDashedCircle(x, y, diameter) {
     let numDashes = 20; // Number of dashes in the circle
     let angleStep = TWO_PI / numDashes;
-    let gapRatio = 0.7; // Ratio of gap size to total segment size (adjust this to change spacing)
+    let gapRatio = 0.9; // Ratio of gap size to total segment size (adjust this to change spacing)
     stroke(this.strokeColor);
     strokeWeight(this.strokeWeightVal);
     strokeCap(ROUND); // Makes the ends of dashes rounded

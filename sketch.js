@@ -76,11 +76,12 @@ kCircle = [
   smallStrokeCircles = [
   new SmallStrokeCircle(bigCircles[1], r * 0.4, null, color('#D43E8E'), 40, true), //  circle 2
   new SmallStrokeCircle(bigCircles[1], r * 0.2, null, color('#879F88'), 25, true), //  circle 2
-  new SmallStrokeCircle(bigCircles[1], r * 0.1, null, color('#EF3D29'), 15, true), //  circle 2
+  new SmallStrokeCircle(bigCircles[1], r * 0.1, null, color('#EF3D29'), 5, true), //  circle 2
+
   new SmallStrokeCircle(bigCircles[2], r * 0.2, null, color(255), 3, true), //  circle 3
   new SmallStrokeCircle(bigCircles[4], r * 0.2, null, color(255), 3, true), // circle 4
   new SmallStrokeCircle(bigCircles[8], r * 0.2, null, color(255), 3, true), // circle 9
-  new SmallStrokeCircle(bigCircles[9], r * 0.2, null, color(255), 3, true), //  circle 10
+ 
   new SmallStrokeCircle(bigCircles[11], r * 0.2, null, color(255), 3, true), //  circle 12
   new SmallStrokeCircle(bigCircles[14], r * 0.2, null, color(255), 3, true),//  circle 15
   new SmallStrokeCircle(bigCircles[15], r * 0.2, null, color(255), 3, true),// circle 16
@@ -110,9 +111,9 @@ kCircle = [
     new WhiteDotLayers(bigCircles[14], 3, 12)
   ]
  yellowDotLayers = [
-    new YellowDotLayers(bigCircles[1], 3, 16),
-    new YellowDotLayers(bigCircles[10], 3, 16),
-    new YellowDotLayers(bigCircles[12], 3, 16),]
+    new YellowDotLayers(bigCircles[1], 3, 16, 150),
+    new YellowDotLayers(bigCircles[10], 3, 16, 190),
+    new YellowDotLayers(bigCircles[12], 3, 16, 180),]
 }
 
 // Circle class for big circles
@@ -244,6 +245,7 @@ class WhiteDotLayers {
     this.bigCircle = bigCircle;
     this.numLayers = numLayers;
     this.numDots = numDots;
+   
   }
   display() {
     let x = width * this.bigCircle.xScale;
@@ -256,7 +258,7 @@ class WhiteDotLayers {
         let dotY = y + radius * sin(angle);
         fill(255);
         noStroke();
-        ellipse(dotX, dotY, 25);
+        ellipse(dotX, dotY, 20);
       }
     }
   }
@@ -267,6 +269,7 @@ class YellowDotLayers {
     this.bigCircle = bigCircle;
     this.numLayers = numLayers;
     this.numDots = numDots;
+    
   }
 
 

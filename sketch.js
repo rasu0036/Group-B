@@ -3,47 +3,44 @@ let bigCircles = [];
 let smallStrokeCircles = [];
 let kpatternColors = [];
 let kCircle = [];
-let concentricCircles = []; // Array to store concentric circles
+let concentricCircles = [];
+let whiteDotLayers = [];
+let yellowDotLayers = [];
 
+// Set up the canvas and initialize circles
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight);
   
-    
-  //color array  
-  colors = [
-    color('#242062'),//1 a
-    color('#0C63AD'),//2 b
-    color('#0E99A2'),//3 c
-    color('#FDCE23'),//4 d
-    color('#199646'),//5 f
-    color('#FDCE23'),//6 d
-    color('#DF3E86'),//7 e
-    color('#F0A428'),//8 g
-    color('#DF3E86'),//9 e
-    color('#F0A428'),//10 g
-    color('#0C63AD'),//11 b
-    color('#F0A428'),//12 g
-    color('#199646'),//13 f
-    color('#242062'),//14 a
-    color('#0E99A2'),//15 c
-    color('#FDCE23')//16 d
-   ];
+//color array  
+colors = [
+  color('#242062'),//1 a
+  color('#0C63AD'),//2 b
+  color('#0E99A2'),//3 c
+  color('#FDCE23'),//4 d
+  color('#199646'),//5 f
+  color('#FDCE23'),//6 d
+  color('#DF3E86'),//7 e
+  color('#F0A428'),//8 g
+  color('#DF3E86'),//9 e
+  color('#F0A428'),//10 g
+  color('#0C63AD'),//11 b
+  color('#F0A428'),//12 g
+  color('#199646'),//13 f
+  color('#242062'),//14 a
+  color('#0E99A2'),//15 c
+  color('#FDCE23')//16 d
+ ];
 
+  // Calculate radius based on canvas size
+  let r = min(width, height) * 0.35;
 
-  //radius is scaled with canvas
-  let r = min(width, height) * 0.35; 
-
-  //I added all circles in the array
-  //if want to use the position values, write "width * bigCircles[0].xScale"(or specific value directly) and so on
+  // Initialize big circles
   bigCircles = [
-    //x larger, more to the right; y larger, more to the bottom
-    //scale factors for positions are set one by one roughly instead of using a loop and formulas, 
-    //if they are incorrect or inconvenient, tell me in the group chat
-    new Circle(0.1, 0.05, r, colors[0]),//1
-    new Circle(0.11, 0.43, r, colors[1]),//2
-    new Circle(0.05, 0.8, r, colors[2]),//3
-    new Circle(0.35, 0, r, colors[3]),//4
-    new Circle(0.3, 0.38, r, colors[4]),//5
+    new Circle(0.1, 0.05, r, colors[0]),
+    new Circle(0.11, 0.43, r, colors[1]),
+    new Circle(0.05, 0.8, r, colors[2]),
+    new Circle(0.35, 0, r, colors[3]),  
+    new Circle(0.3, 0.38, r, colors[4]), 
     new Circle(0.24, 0.75, r, colors[5]),//6
     new Circle(0.17, 1.1, r, colors[6]),//7
     new Circle(0.5, 0.26, r, colors[7]),//8
@@ -55,66 +52,86 @@ function setup() {
     new Circle(0.89, 0.08, r, colors[13]),//14
     new Circle(0.9, 0.57, r, colors[14]),//15
     new Circle(0.87, 1, r, colors[15])//16
-    ];
+  ];
+//kate's pattern, dotted line circles
+kpatternColors = [
+  color('#FFFFFF'),//4
+  color('#0C63AD'),//6
+  color('#b780b7'),//8
+  color('#FFFFFF'),//12
+  color('#FDCE23'),//14
+  color('#FFFFFF')//16
+  ];
 
-    //kate's pattern, dotted line circles
-  kpatternColors = [
-    color('#FFFFFF'),//4
-    color('#0C63AD'),//6
-    color('#b780b7'),//8
-    color('#FFFFFF'),//12
-    color('#FDCE23'),//14
-    color('#FFFFFF')//16
-    ];
+kCircle = [
+  new kCircles(bigCircles[3].xScale, bigCircles[3].yScale, r, kpatternColors[0]),
+  new kCircles(bigCircles[5].xScale, bigCircles[5].yScale, r, kpatternColors[1]),
+  new kCircles(bigCircles[7].xScale, bigCircles[7].yScale, r, kpatternColors[2]),
+  new kCircles(bigCircles[11].xScale, bigCircles[11].yScale, r, kpatternColors[3]),
+  new kCircles(bigCircles[13].xScale, bigCircles[13].yScale, r, kpatternColors[4]),
+  new kCircles(bigCircles[15].xScale, bigCircles[15].yScale, r, kpatternColors[5])
+  ]
 
-  kCircle = [
-    new kCircles(bigCircles[3].xScale, bigCircles[3].yScale, r, kpatternColors[0]),
-    new kCircles(bigCircles[5].xScale, bigCircles[5].yScale, r, kpatternColors[1]),
-    new kCircles(bigCircles[7].xScale, bigCircles[7].yScale, r, kpatternColors[2]),
-    new kCircles(bigCircles[11].xScale, bigCircles[11].yScale, r, kpatternColors[3]),
-    new kCircles(bigCircles[13].xScale, bigCircles[13].yScale, r, kpatternColors[4]),
-    new kCircles(bigCircles[15].xScale, bigCircles[15].yScale, r, kpatternColors[5])
-    ]
+  // Small stroke circles with specified colors and locations
+  smallStrokeCircles = [
+  new SmallStrokeCircle(bigCircles[1], r * 0.4, null, color('#D43E8E'), 40, true), //  circle 2
+  new SmallStrokeCircle(bigCircles[1], r * 0.2, null, color('#879F88'), 25, true), //  circle 2
+  new SmallStrokeCircle(bigCircles[1], r * 0.1, null, color('#EF3D29'), 15, true), //  circle 2
+  new SmallStrokeCircle(bigCircles[2], r * 0.2, null, color(255), 3, true), //  circle 3
+  new SmallStrokeCircle(bigCircles[4], r * 0.2, null, color(255), 3, true), // circle 4
+  new SmallStrokeCircle(bigCircles[8], r * 0.2, null, color(255), 3, true), // circle 9
+  new SmallStrokeCircle(bigCircles[9], r * 0.2, null, color(255), 3, true), //  circle 10
+  new SmallStrokeCircle(bigCircles[11], r * 0.2, null, color(255), 3, true), //  circle 12
+  new SmallStrokeCircle(bigCircles[14], r * 0.2, null, color(255), 3, true),//  circle 15
+  new SmallStrokeCircle(bigCircles[15], r * 0.2, null, color(255), 3, true),// circle 16
+  new SmallStrokeCircle(bigCircles[1], r * 0.34, null, color('#F05641'), 15, false, true), //  circle 2
+  new SmallStrokeCircle(bigCircles[1], r * 0.4, null, color('#F05641'), 10, false, true), //  circle 2
+  ];
 
-    // Small strke circles with specified colors and locations
-    smallStrokeCircles = [
-    new SmallStrokeCircle(bigCircles[1], r * 0.4, null, color('#D43E8E'), 40, true), //  circle 2
-    new SmallStrokeCircle(bigCircles[1], r * 0.2, null, color('#879F88'), 25, true), //  circle 2
-    new SmallStrokeCircle(bigCircles[1], r * 0.1, null, color('#EF3D29'), 15, true), //  circle 2
-    new SmallStrokeCircle(bigCircles[2], r * 0.2, null, color(255), 3, true), //  circle 3
-    new SmallStrokeCircle(bigCircles[4], r * 0.2, null, color(255), 3, true), // circle 4
-    new SmallStrokeCircle(bigCircles[8], r * 0.2, null, color(255), 3, true), // circle 9
-    new SmallStrokeCircle(bigCircles[9], r * 0.2, null, color(255), 3, true), //  circle 10
-    new SmallStrokeCircle(bigCircles[11], r * 0.2, null, color(255), 3, true), //  circle 12
-    new SmallStrokeCircle(bigCircles[14], r * 0.2, null, color(255), 3, true),//  circle 15
-    new SmallStrokeCircle(bigCircles[15], r * 0.2, null, color(255), 3, true),// circle 16
-    
-    new SmallStrokeCircle(bigCircles[1], r * 0.34, null, color('#F05641'), 15, false, true), //  circle 2
-    new SmallStrokeCircle(bigCircles[1], r * 0.4, null, color('#F05641'), 10, false, true), //  circle 2
-   
-    ];
-  }
+  // Define color palettes for concentric circles
+  let concentricFiveLayerColors = [color('#199646'), color('#DF3E86'), color('#0C63AD'), color('#FDCE23'), color('#BFC3BF')];
+  let concentricThreeLayerColors = [color('#BFC3BF'), color('#FDCE23'), color('#0C63AD')];
 
-//set up the class of the big circle
+  // Initialize concentric circles for bigCircles[3] and bigCircles[4]
+  concentricCircles.push(new ConcentricCircle(bigCircles[1], concentricFiveLayerColors));
+  concentricCircles.push(new ConcentricCircle(bigCircles[3], concentricFiveLayerColors));
+  concentricCircles.push(new ConcentricCircle(bigCircles[4], concentricFiveLayerColors));
+  concentricCircles.push(new ConcentricCircle(bigCircles[7], concentricFiveLayerColors));
+  concentricCircles.push(new ConcentricCircle(bigCircles[13], concentricFiveLayerColors));
+  concentricCircles.push(new ConcentricCircle(bigCircles[14], concentricFiveLayerColors));
+  concentricCircles.push(new ConcentricCircle(bigCircles[9], concentricThreeLayerColors));
+  concentricCircles.push(new ConcentricCircle(bigCircles[11], concentricThreeLayerColors));
+
+  whiteDotLayers = [
+    new WhiteDotLayers(bigCircles[2], 3, 18),
+    new WhiteDotLayers(bigCircles[4], 3, 18),
+    new WhiteDotLayers(bigCircles[9], 3, 12),
+    new WhiteDotLayers(bigCircles[0], 3, 12),
+    new WhiteDotLayers(bigCircles[14], 3, 12)
+  ]
+ yellowDotLayers = [
+    new YellowDotLayers(bigCircles[1], 3, 16),
+    new YellowDotLayers(bigCircles[10], 3, 16),
+    new YellowDotLayers(bigCircles[12], 3, 16),]
+}
+
+// Circle class for big circles
 class Circle {
-  //x and y scale based on the width and height
-  //thus the patterns can change with the size of the window 
   constructor(xScale, yScale, r, color) {
     this.xScale = xScale; 
     this.yScale = yScale; 
     this.r = r;
     this.color = color;
-    }
-  
+  }
+
   display() {
     fill(this.color);
     noStroke();
-    //x and y actual position are width*scale factors
     let x = width * this.xScale;
     let y = height * this.yScale;
     ellipse(x, y, this.r);
-    }
   }
+}
 
 class kCircles {
   constructor(x, y, r, color){
@@ -164,6 +181,7 @@ class SmallStrokeCircle {
     this.hasFill = hasFill;
     this.isDashed = isDashed;
   }
+
   draw() {
     let x = width * this.bigCircle.xScale;
     let y = height * this.bigCircle.yScale;
@@ -179,8 +197,7 @@ class SmallStrokeCircle {
         stroke(this.strokeColor);
         strokeWeight(this.strokeWeightVal);
         ellipse(x, y, this.r);
-    }
-}
+    }}
 
 drawDashedCircle(x, y, diameter) {
     let numDashes = 20; // Number of dashes in the circle
@@ -199,20 +216,89 @@ drawDashedCircle(x, y, diameter) {
         line(x1, y1, x2, y2);
     }}}
 
+// ConcentricCircle class with multiple layers and colors
+class ConcentricCircle {
+  constructor(parentCircle, colors) {
+    this.parentCircle = parentCircle; // Associate with bigCircle
+    this.colors = colors;
+  }
+
+  display() {
+    let x = width * this.parentCircle.xScale;
+    let y = height * this.parentCircle.yScale;
+    let baseRadius = this.parentCircle.r * 0.3;
+    let layers = this.colors.length;
+
+    // Draw each layer with progressively smaller radii
+    for (let i = 0; i < layers; i++) {
+      let radius = baseRadius * (1 - i * 0.2); // Decreasing radius for each layer
+      noStroke();
+      fill(this.colors[i]);
+      ellipse(x, y, radius * 10/layers);
+    }
+  }
+}
+// White dot layers class
+class WhiteDotLayers {
+  constructor(bigCircle, numLayers, numDots) {
+    this.bigCircle = bigCircle;
+    this.numLayers = numLayers;
+    this.numDots = numDots;
+  }
+  display() {
+    let x = width * this.bigCircle.xScale;
+    let y = height * this.bigCircle.yScale;
+    for (let layer = 1; layer <= this.numLayers; layer++) {
+      let radius = 100 + (layer * 45);
+      for (let i = 0; i < this.numDots; i++) {
+        let angle = TWO_PI / this.numDots * i;
+        let dotX = x + radius * cos(angle);
+        let dotY = y + radius * sin(angle);
+        fill(255);
+        noStroke();
+        ellipse(dotX, dotY, 25);
+      }
+    }
+  }
+}
+// Yellow dot layers class
+class YellowDotLayers {
+  constructor(bigCircle, numLayers, numDots) {
+    this.bigCircle = bigCircle;
+    this.numLayers = numLayers;
+    this.numDots = numDots;
+  }
 
 
 
+
+  display() {
+    let x = width * this.bigCircle.xScale;
+    let y = height * this.bigCircle.yScale;
+    fill('#fabd4d');
+    noStroke();
+    for (let layer = 1; layer <= this.numLayers; layer++) {
+      let radius = 100 + (layer * 45);
+      for (let i = 0; i < this.numDots; i++) {
+        let angle = TWO_PI / this.numDots * i;
+        let dotX = x + radius * cos(angle);
+        let dotY = y + radius * sin(angle);
+        ellipse(dotX, dotY, 20);
+      }
+    }
+  }
+}
 
 function draw() {
   background(255);
 
-  //draw the big circles
-  for(let circle of bigCircles){
+  // Draw big circles
+  for (let circle of bigCircles) {
     circle.display();
-    }
+  }
 
-    //draw the dottedline circles
-  for(let kcircles of kCircle){
+   //draw the dottedline circles
+   for(let kcircles of kCircle){
     kcircles.display();
   }
 
@@ -220,8 +306,17 @@ function draw() {
   for (let smallCircle of smallStrokeCircles) {
     smallCircle.draw();
   }
+  // Draw concentric circles
+  for (let concentric of concentricCircles) {
+    concentric.display();
+  }
+  for (let dotLayer of whiteDotLayers){ dotLayer.display();
+  }
+  // Draw yellow dot layers
+  for (let dotLayer of yellowDotLayers) {dotLayer.display();
+  }
 }
-  
+
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-  }
+}

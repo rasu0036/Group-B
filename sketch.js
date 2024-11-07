@@ -149,7 +149,7 @@ kCircle = [
   let concentricThreeLayerColors1 = [color('#BFC3BF'), color('#FDCE23'), color('#DF3E86')];
   let concentricThreeLayerColors2 = [color('#BFC3BF'), color('#FDCE23'), color('#0C63AD')];
 
-  // Initialize concentric circles for bigCircles[3] and bigCircles[4]
+  // Initialize concentric circles for bigCircles，the number will Decrease by one because in the array
   concentricCircles.push(new ConcentricCircle(bigCircles[0], concentricFiveLayerColors));
   concentricCircles.push(new ConcentricCircle(bigCircles[2], concentricFiveLayerColors));
   concentricCircles.push(new ConcentricCircle(bigCircles[3], concentricFiveLayerColors));

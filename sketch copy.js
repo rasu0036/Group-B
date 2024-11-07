@@ -80,7 +80,7 @@ function setup() {
     new kCircles(bigCircles[15].xScale, bigCircles[15].yScale, r, kpatternColors[5])
     ]
 
-    // Small strke circles with specified colors and locations
+    // Small stroke circles with specified colors and locations
     smallStrokeCircles = [
     new SmallStrokeCircle(bigCircles[1], r * 0.4, null, color('#D43E8E'), 40, true), //  circle 2
     new SmallStrokeCircle(bigCircles[1], r * 0.2, null, color('#879F88'), 25, true), //  circle 2
@@ -107,12 +107,14 @@ function setup() {
     new SmallStrokeCircle(bigCircles[10], r * 0.2, null, color('#879F88'), 25, true), //  circle 11
     new SmallStrokeCircle(bigCircles[10], r * 0.1, null, color('#EF3D29'), 15, true), //  circle 11
 
+    new SmallStrokeCircle(bigCircles[11], r * 0.15, null, color('#DA70AC'), 30, true), //  circle 12
+    
     new SmallStrokeCircle(bigCircles[14], r * 0.2, null, color('#BE479A'), 30, true), //  circle 15
     new SmallStrokeCircle(bigCircles[14], r * 0.2, null, color('#F05656'), 15, true), //  circle 15
     new SmallStrokeCircle(bigCircles[14], r * 0.07, null, color('#BE479A'), 30, true), //  circle 15
     new SmallStrokeCircle(bigCircles[14], r * 0.07, null, color('#F05656'), 15, true), //  circle 15
    
-    new SmallStrokeCircle(bigCircles[11], r * 0.15, null, color('#DA70AC'), 30, true), //  circle 12
+   
     
    
     new SmallStrokeCircle(bigCircles[15], r * 0.4, null, color('#F05641'), 15, true), // circle 16

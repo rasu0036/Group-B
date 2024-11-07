@@ -297,7 +297,7 @@ class WhiteDotLayers {
     let x = width * this.bigCircle.xScale;
     let y = height * this.bigCircle.yScale;
     for (let layer = 1; layer <= this.numLayers; layer++) {
-      let radius = 50 + (layer * 40);
+      let radius = this.bigCircle.r * 0.3 + layer * 30;
       for (let i = 0; i < this.numDots; i++) {
         let angle = TWO_PI / this.numDots * i;
         let dotX = x + radius * cos(angle);
@@ -324,7 +324,7 @@ class YellowDotLayers {
     fill('#fabd4d');
     noStroke();
     for (let layer = 1; layer <= this.numLayers; layer++) {
-      let radius = 300 + (layer * 40);
+      let radius = this.bigCircle.r * 0.20 + layer * 30;
       for (let i = 0; i < this.numDots; i++) {
         let angle = TWO_PI / this.numDots * i;
         let dotX = x + radius * cos(angle);

@@ -138,11 +138,11 @@ kCircle = [
  yellowDotLayers = [
     new YellowDotLayers(bigCircles[0], 3, 12),
     new YellowDotLayers(bigCircles[2], 3, 14),
-    new YellowDotLayers(bigCircles[1], 5, 16),
+    new YellowDotLayers(bigCircles[1], 4, 16),
     new YellowDotLayers(bigCircles[4], 3, 12),
     new YellowDotLayers(bigCircles[6], 4, 18),
     new YellowDotLayers(bigCircles[12], 3, 16),
-    new YellowDotLayers(bigCircles[14], 5, 12),]
+    new YellowDotLayers(bigCircles[14], 4, 12),]
      
 // Define color palettes for concentric circles
   let concentricFiveLayerColors = [color('#199646'), color('#DF3E86'), color('#0C63AD'), color('#FDCE23'), color('#BFC3BF')];

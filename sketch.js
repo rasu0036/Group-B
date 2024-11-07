@@ -93,10 +93,9 @@ kCircle = [
     new SmallStrokeCircle(bigCircles[8], r * 0.2, null, color('#F05641'), 15, true), // circle 9
     new SmallStrokeCircle(bigCircles[8], r * 0.1, null, color('#FFB6E3'), 10, true), // circle 9
 
-    new SmallStrokeCircle(bigCircles[9], r * 0.1, null, color('#DA70AC'), 30, true), //  circle 10
+    new SmallStrokeCircle(bigCircles[9], r * 0.9, null, color('#DA70AC'), 10, true), //  circle 10
+    new SmallStrokeCircle(bigCircles[9], r * 0.8, null, color('#D43E8E'), 20, true), //  circle 10
 
-
-    new SmallStrokeCircle(bigCircles[10], r * 0.4, null, color('#D43E8E'), 40, true), //  circle 11
     new SmallStrokeCircle(bigCircles[10], r * 0.2, null, color('#879F88'), 25, true), //  circle 11
     new SmallStrokeCircle(bigCircles[10], r * 0.1, null, color('#EF3D29'), 15, true), //  circle 11
 
@@ -132,20 +131,23 @@ kCircle = [
   ];
 
   whiteDotLayers = [
-    new WhiteDotLayers(bigCircles[2], 3, 18),
-    new WhiteDotLayers(bigCircles[4], 3, 18),
-    new WhiteDotLayers(bigCircles[9], 3, 12),
-    new WhiteDotLayers(bigCircles[0], 3, 12),
-    new WhiteDotLayers(bigCircles[14], 3, 12)
+    new WhiteDotLayers(bigCircles[5], 3, 18),
+    new WhiteDotLayers(bigCircles[7], 3, 12),
+    new WhiteDotLayers(bigCircles[9], 3, 12)
   ]
  yellowDotLayers = [
-    new YellowDotLayers(bigCircles[1], 3, 16),
-    new YellowDotLayers(bigCircles[10], 3, 16),
-    new YellowDotLayers(bigCircles[12], 3, 16),]
+    new YellowDotLayers(bigCircles[0], 3, 12),
+    new YellowDotLayers(bigCircles[2], 3, 14),
+    new YellowDotLayers(bigCircles[1], 5, 16),
+    new YellowDotLayers(bigCircles[4], 3, 12),
+    new YellowDotLayers(bigCircles[6], 4, 18),
+    new YellowDotLayers(bigCircles[12], 3, 16),
+    new YellowDotLayers(bigCircles[14], 5, 12),]
      
 // Define color palettes for concentric circles
   let concentricFiveLayerColors = [color('#199646'), color('#DF3E86'), color('#0C63AD'), color('#FDCE23'), color('#BFC3BF')];
-  let concentricThreeLayerColors = [color('#BFC3BF'), color('#FDCE23'), color('#0C63AD')];
+  let concentricThreeLayerColors1 = [color('#BFC3BF'), color('#FDCE23'), color('#DF3E86')];
+  let concentricThreeLayerColors2 = [color('#BFC3BF'), color('#FDCE23'), color('#0C63AD')];
 
   // Initialize concentric circles for bigCircles[3] and bigCircles[4]
   concentricCircles.push(new ConcentricCircle(bigCircles[0], concentricFiveLayerColors));
@@ -154,8 +156,8 @@ kCircle = [
   concentricCircles.push(new ConcentricCircle(bigCircles[6], concentricFiveLayerColors));
   concentricCircles.push(new ConcentricCircle(bigCircles[12], concentricFiveLayerColors));
   concentricCircles.push(new ConcentricCircle(bigCircles[13], concentricFiveLayerColors));
-  concentricCircles.push(new ConcentricCircle(bigCircles[8], concentricThreeLayerColors));
-  concentricCircles.push(new ConcentricCircle(bigCircles[10], concentricThreeLayerColors));
+  concentricCircles.push(new ConcentricCircle(bigCircles[8], concentricThreeLayerColors1));
+  concentricCircles.push(new ConcentricCircle(bigCircles[10], concentricThreeLayerColors2));
 }
 
 
@@ -263,7 +265,7 @@ drawDashedCircle(x, y, diameter) {
 
 // ConcentricCircle class with multiple layers and colors
 class ConcentricCircle {
-  constructor(parentCircle, colors) {
+  constructor(parentCircle, colors) {0
     this.parentCircle = parentCircle; // Associate with bigCircle
     this.colors = colors;
   }
@@ -322,7 +324,7 @@ class YellowDotLayers {
     fill('#fabd4d');
     noStroke();
     for (let layer = 1; layer <= this.numLayers; layer++) {
-      let radius = 50 + (layer * 40);
+      let radius = 300 + (layer * 40);
       for (let i = 0; i < this.numDots; i++) {
         let angle = TWO_PI / this.numDots * i;
         let dotX = x + radius * cos(angle);

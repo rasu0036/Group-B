@@ -142,7 +142,22 @@ kCircle = [
     new YellowDotLayers(bigCircles[1], 3, 16, 150),
     new YellowDotLayers(bigCircles[10], 3, 16, 190),
     new YellowDotLayers(bigCircles[12], 3, 16, 180),]
+     
+// Define color palettes for concentric circles
+  let concentricFiveLayerColors = [color('#199646'), color('#DF3E86'), color('#0C63AD'), color('#FDCE23'), color('#BFC3BF')];
+  let concentricThreeLayerColors = [color('#BFC3BF'), color('#FDCE23'), color('#0C63AD')];
+
+  // Initialize concentric circles for bigCircles[3] and bigCircles[4]
+  concentricCircles.push(new ConcentricCircle(bigCircles[0], concentricFiveLayerColors));
+  concentricCircles.push(new ConcentricCircle(bigCircles[2], concentricFiveLayerColors));
+  concentricCircles.push(new ConcentricCircle(bigCircles[3], concentricFiveLayerColors));
+  concentricCircles.push(new ConcentricCircle(bigCircles[6], concentricFiveLayerColors));
+  concentricCircles.push(new ConcentricCircle(bigCircles[12], concentricFiveLayerColors));
+  concentricCircles.push(new ConcentricCircle(bigCircles[13], concentricFiveLayerColors));
+  concentricCircles.push(new ConcentricCircle(bigCircles[8], concentricThreeLayerColors));
+  concentricCircles.push(new ConcentricCircle(bigCircles[10], concentricThreeLayerColors));
 }
+
 
 // Circle class for big circles
 class Circle {
@@ -300,9 +315,6 @@ class YellowDotLayers {
     this.numDots = numDots;
     
   }
-
-
-
 
   display() {
     let x = width * this.bigCircle.xScale;

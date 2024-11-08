@@ -107,8 +107,6 @@ kCircle = [
     new SmallStrokeCircle(bigCircles[14], r * 0.07, null, color('#BE479A'), 30, true), //  circle 15
     new SmallStrokeCircle(bigCircles[14], r * 0.07, null, color('#F05656'), 15, true), //  circle 15
    
-    
-    
    
     new SmallStrokeCircle(bigCircles[15], r * 0.4, null, color('#F05641'), 15, true), // circle 16
     new SmallStrokeCircle(bigCircles[15], r * 0.3, null, color('#FFB6E3'), 10, true), // circle 16
@@ -342,8 +340,7 @@ function draw() {
   for (let circle of bigCircles) {
     circle.display();
   }
-
-  
+   
   // Draw concentric circles
   for (let concentric of concentricCircles) {
     concentric.display();
